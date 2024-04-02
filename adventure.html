@@ -3,30 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Defend the Kingdom</title>
     <link rel="stylesheet" href="styles.css">
+    <title>War Adventure</title>
 </head>
 <body>
     <header>
-        <h1>Defend the Kingdom</h1>
+        <h1>War Adventure</h1>
     </header>
-    <div id="game-container">
-        <div id="story"></div>
-        <div id="choices"></div>
-        <div id="image-container">
-            <img id="image" src="" alt="Game Image">
+    <div id="home">
+        <div id="home-description">
+            <p>Your kingdom is under attack by a powerful enemy. As the king, you must make strategic decisions to defend your people and win the war.</p>
+        </div>
+        <div id="home-image-container">
+            <img id="home-image" src="4.jpg" alt="War Image">
+        </div>
+        <div id="home-buttons">
+            <button id="start-game" onclick="startGame()">Start Adventure</button>
+        </div>
+        <div id="addendum">
+            <h2>Addendum</h2>
+            <p>This interactive story was created as a choose-your-own-adventure game. The process involved crafting a narrative with various choices and consequences, making use of HTML, CSS, and JavaScript. Creative decisions were made to enhance the user experience, such as adding images to each stage and incorporating a dynamic color scheme.</p>
+            <p>Challenges were encountered during the implementation, particularly in ensuring that buttons at each stage functioned correctly. Through debugging and careful examination of the JavaScript code, these issues were resolved.</p>
+            <p>Insights gained during this process include the importance of maintaining a clear and organized structure in the code, as well as the significance of thorough testing to identify and address potential issues.</p>
         </div>
     </div>
-
-    <footer>
-        <p>Last updated: 
-            <span id="lastModified"></span>
-        </p>
-    </footer>
+    <div id="decision-page" style="display: none;">
+        <h2 id="decision-heading">Decide Your Next Move</h2>
+        <div id="choices"></div>
+        <button id="restart-game" onclick="restartGame()">Restart</button>
+    </div>
+    <div id="image-container">
+        <img id="story-image" src="4.jpg" alt="Game Image">
+    </div>
     <script src="adventure.js"></script>
-    <script type="text/javascript">
-        var x = document.lastModified;
-        document.getElementById('lastModified').textContent = x;
-    </script>
 </body>
 </html>

@@ -1,120 +1,127 @@
-const story = {
-    start: {
+// Story stages
+const story = [
+    {
         text: "Your kingdom is under attack by a powerful enemy. As the king, you must make strategic decisions to defend your people and win the war. What is your first move?",
         choices: ["Gather your troops and prepare for battle", "Negotiate a peace treaty"],
-        consequence: {
-            "Gather your troops and prepare for battle": "stage1",
-            "Negotiate a peace treaty": "peace"
-        },
-        image: "start.jpg"
+        consequence: [1, 2],
+        image: "4.jpg"
     },
-    stage1: {
+    {
         text: "Your troops are ready for battle. Do you want to launch a surprise attack or wait for the enemy to make the first move?",
         choices: ["Launch a surprise attack", "Wait for the enemy's move"],
-        consequence: {
-            "Launch a surprise attack": "stage2",
-            "Wait for the enemy's move": "peace"
-        },
-        image: "stage1.jpg"
+        consequence: [3, 4],
+        image: "3.jpg"
     },
-    stage2: {
+    {
         text: "Your surprise attack has caught the enemy off guard, but they have regrouped and launched a counterattack. Your troops are outnumbered. Do you order a retreat or stand your ground?",
         choices: ["Order a retreat", "Stand your ground"],
-        consequence: {
-            "Order a retreat": "stage3",
-            "Stand your ground": "peace"
-        },
-        image: "stage2.jpg"
+        consequence: [5, 6],
+        image: "2.jpg"
     },
-    stage3: {
+    {
         text: "You ordered a strategic retreat, saving many lives. The enemy has gained control of some territories, but your kingdom is still standing. Do you call for reinforcements or launch a counterattack?",
         choices: ["Call for reinforcements", "Launch a counterattack"],
-        consequence: {
-            "Call for reinforcements": "stage4",
-            "Launch a counterattack": "peace"
-        },
-        image: "stage3.jpg"
+        consequence: [7, 8],
+        image: "1.jpg"
     },
-    stage4: {
+    {
         text: "Your reinforcements have arrived, and your troops are ready for a decisive battle. Do you launch an all-out offensive or try to reclaim lost territories first?",
         choices: ["Launch an all-out offensive", "Reclaim lost territories"],
-        consequence: {
-            "Launch an all-out offensive": "stage5",
-            "Reclaim lost territories": "peace"
-        },
-        image: "stage4.jpg"
+        consequence: [9, 10],
+        image: "6.jpg"
     },
-    stage5: {
+    {
         text: "Your all-out offensive has caught the enemy by surprise. Their defenses are crumbling, but they have one last trick up their sleeve. Do you press the attack or call for a temporary ceasefire?",
         choices: ["Press the attack", "Call for a temporary ceasefire"],
-        consequence: {
-            "Press the attack": "stage6",
-            "Call for a temporary ceasefire": "peace"
-        },
-        image: "stage5.jpg"
+        consequence: [11, 12],
+        image: "5.jpg"
     },
-    stage6: {
+    {
         text: "Your relentless attack has paid off. The enemy has been defeated, and their leaders have surrendered. Do you show mercy or execute them for their crimes?",
         choices: ["Show mercy", "Execute them"],
-        consequence: {
-            "Show mercy": "kingWon",
-            "Execute them": "peace"
-        },
-        image: "stage6.jpg"
+        consequence: [13, 14],
+        image: "5.jpg"
     },
-    kingWon: {
+    {
         text: "Congratulations! Your strategic decisions and bravery have led your kingdom to victory. You have defended your people and secured your reign as a wise and just king.",
-        image: "kingWon.jpg"
+        image: "2.jpg"
     },
-    peace: {
+    {
         text: "While your kingdom is at peace, the enemy's demands have left you with a heavy price to pay. Your people are safe, but your reign has been tarnished by compromise.",
-        image: "peace.jpg"
+        image: "1.jpg"
     }
-};
+];
 
-let currentStage = 'start';
+// Game state
+let currentStage = 0;
 
-function startGame() {
-    currentStage = 'start';
-    updatePage(currentStage);
+// Display story text
+function displayStory(text) {
+    document.getElementById("decision-heading").innerText = text;
 }
 
-function updatePage(stage) {
-    const storyObject = story[stage];
-    document.getElementById("story").textContent = storyObject.text;
-    document.getElementById("image").src = "images/" + storyObject.image;
-    document.getElementById("choices").innerHTML = "";
+// Display choices
+function displayChoices(choices) {
+    let choicesDiv = document.getElementById("choices");
+    choicesDiv.innerHTML = "";
 
-    if (storyObject.choices) {
-        storyObject.choices.forEach(choice => {
-            const button = document.createElement("button");
-            button.textContent = choice;
-            button.addEventListener("click", function() {
-                makeChoice(choice);
-            });
-            document.getElementById("choices").appendChild(button);
+    for (let i = 0; i < choices.length; i++) {
+        let choiceButton = document.createElement("button");
+        choiceButton.textContent = choices[i];
+        choiceButton.addEventListener("click", function() {
+            makeChoice(story[currentStage].consequence[i]);
         });
-    }
-
-    if (stage !== 'start') {
-        const restartButton = document.createElement("button");
-        restartButton.textContent = "Restart";
-        restartButton.addEventListener("click", startGame);
-        document.getElementById("choices").appendChild(restartButton);
+        choicesDiv.appendChild(choiceButton);
     }
 }
 
-function makeChoice(choice) {
-    const consequence = story[currentStage].consequence[choice];
-    currentStage = consequence;
-    updatePage(consequence);
+// Display image 
+function displayImage(image) {
+    let img = document.getElementById("story-image");
+    img.src = image;
+    img.style.display = "block";
 }
 
-function changeBackgroundColor() {
-    const colors = ['#ff9999', '#99ff99', '#9999ff', '#ffff99', '#ff99ff', '#99ffff'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    document.body.style.backgroundColor = randomColor;
+// Start game
+function startGame() {
+    currentStage = 0;
+    document.getElementById("home").style.display = "none";
+    document.getElementById("decision-page").style.display = "block";
+    updateStory();
 }
 
-startGame(); // Start the game initially
-setInterval(changeBackgroundColor, 3000); // Change background color every 3 seconds
+// Restart game
+function restartGame() {
+    currentStage = 0; 
+    document.getElementById("home").style.display = "block";
+    document.getElementById("decision-page").style.display = "none";
+}
+
+// Update story
+function updateStory() {
+    let stage = story[currentStage];
+    
+    displayStory(stage.text);
+    displayChoices(stage.choices);
+    displayImage(stage.image);
+}
+
+// Make choice
+function makeChoice(consequence) {
+    if (consequence !== undefined) {
+        currentStage = consequence;
+        updateStory();
+    } else {
+        // End of the game or specific case
+        displayStory("Congratulations! You've defended your kingdom and emerged victorious.");
+        displayChoices([]);
+        displayImage("8.jpg"); // Replace "8.jpg" with the image for the victorious ending
+        document.getElementById("restart-game").style.display = "inline-block";
+    }
+}
+
+// Start game on click
+document.getElementById("start-game").addEventListener("click", startGame);
+
+// Restart game on click
+document.getElementById("restart-game").addEventListener("click", restartGame);
