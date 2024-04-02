@@ -10,7 +10,7 @@ const story = [
         text: "Your troops are ready for battle. Do you want to launch a surprise attack or wait for the enemy to make the first move?",
         choices: ["Launch a surprise attack", "Wait for the enemy's move"],
         consequence: [3, 4],
-        image: "3.jpg"
+        image: "1.jpg"
     },
     {
         text: "Your surprise attack has caught the enemy off guard, but they have regrouped and launched a counterattack. Your troops are outnumbered. Do you order a retreat or stand your ground?",
@@ -40,7 +40,7 @@ const story = [
         text: "Your relentless attack has paid off. The enemy has been defeated, and their leaders have surrendered. Do you show mercy or execute them for their crimes?",
         choices: ["Show mercy", "Execute them"],
         consequence: [13, 14],
-        image: "5.jpg"
+        image: "3.jpg"
     },
     {
         text: "Congratulations! Your strategic decisions and bravery have led your kingdom to victory. You have defended your people and secured your reign as a wise and just king.",
