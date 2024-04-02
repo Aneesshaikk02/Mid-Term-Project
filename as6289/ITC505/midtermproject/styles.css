@@ -1,0 +1,85 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 3s;
+    background-color: white; /* Initial background color */
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+#home {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home-image-container, #image-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#home-image, #story-image {
+    width: 400px; /* Adjust image size as needed */
+    height: auto;
+    border-radius: 5px;
+}
+
+#home-buttons button {
+    font-size: 1.5em;
+    padding: 15px 30px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#addendum {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+#decision-page {
+    text-align: center;
+    padding: 20px;
+    display: none;
+}
+
+#decision-page h2 {
+    color: #333;
+}
+
+#choices button {
+    font-size: 1em;
+    padding: 10px 15px;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#restart-game {
+    font-size: 1em;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+}
